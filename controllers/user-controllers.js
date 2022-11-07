@@ -1,6 +1,7 @@
 const { User } = require("../models");
+const { populate } = require("../models/User");
 
-const pizzaController = {
+const UserController = {
   // get all Users
   getAllUsers(req, res) {
     User.find({})
@@ -72,7 +73,6 @@ const pizzaController = {
       .catch((err) => res.json(err));
   },
 
-  // delete pizza
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
       .then((dbUserData) => res.json(dbUserData))
@@ -80,4 +80,4 @@ const pizzaController = {
   },
 };
 
-module.exports = pizzaController;
+module.exports = User;
