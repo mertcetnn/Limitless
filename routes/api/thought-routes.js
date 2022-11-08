@@ -1,8 +1,8 @@
 const router = require("express").Router();
 
-const thought = require("../../controllers/thought-controller");
+const thought = require("../../controllers/tought-controllers");
 
-router.route("/").post(thought.createThought).get(thought.findThought);
+router.route("/").get(thought.findThought).post(thought.createThought);
 router
   .route("/:Id")
   .get(thought.findOneThough)

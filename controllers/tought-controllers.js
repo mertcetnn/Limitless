@@ -1,6 +1,14 @@
 const { Thought, Reaction, User } = require("../models");
 
 const ThoughtController = {
+  getThoughts(req, res) {
+    Thought.find({})
+      .then((dbThoughtData) => res.json(dbThoughtData))
+      .catch((err) => {
+        console.log("An error has occurred: ", err);
+        res.status(500).json(err);
+      });
+  },
   createThought({ body: { username, thoughtText, userId } }, res) {
     Thought.create({ thoughtText, username })
       .then((data) =>
@@ -12,7 +20,7 @@ const ThoughtController = {
       .catch((err) => res.json(err));
   },
 
-  findThought({ params, body }, res) {
+  findThought(req, res) {
     Thought.find({})
       .select("-__v")
       .populate({ path: "reactions", select: "-__v" })
